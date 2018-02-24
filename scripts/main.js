@@ -2,23 +2,20 @@ let myScore = 0;
 let compScore = 0;
 let round = 1;
 
-const buttons = document.querySelectorAll('button');
+const choices = document.querySelectorAll('.choices');
 const playerScore = document.querySelector('#playerScore');
 const computorScore = document.querySelector('#computerScore');
 const gameWinner = document.querySelector('#winner');
+const reset = document.querySelector('#reset');
 
-buttons.forEach((button) => {
+document.getElementById('reset').addEventListener('click', resetGame);
+
+choices.forEach((button) => {
   button.addEventListener('click', () => {
     playerSelection = button.id;
   });
   button.addEventListener('click', game);
 });
-
-function resetGame() {
-  myScore = 0;
-  compScore = 0;
-  round = 1;
-}
 
 function game() {
   let computerSelection = computerPlay();
@@ -29,6 +26,9 @@ function game() {
 
   if (myScore === 5 || compScore === 5) {
     winner();
+    choices.forEach((button) => {
+      button.removeEventListener('click', game);
+    });
   }
 }
 
@@ -86,19 +86,6 @@ function updateScore(playerSelection, computerSelection) {
   }
 }
 
-function winner() {
-  let win = `You win! After ${round} rounds, the final score is You: ${myScore} Computer: ${compScore}`;
-  let lose = `You lose! After ${round} rounds, the final score is You: ${myScore} Computer: ${compScore}`;
-
-  if (myScore > compScore) {
-    console.log(win);
-    alert(win);
-  } else if (myScore < compScore) {
-    console.log(lose);
-    alert(lose);
-  }
-}
-
 function computerPlay() {
   let result = Math.floor(Math.random() * 3);
   if (result === 0) {
@@ -108,4 +95,24 @@ function computerPlay() {
   } else {
     return 'scissors';
   }
+}
+
+function winner() {
+  if (myScore > compScore) {
+    gameWinner.textContent = 'You win!';
+  } else if (myScore < compScore) {
+    gameWinner.textContent = 'You lose!';
+  }
+}
+
+function resetGame() {
+  myScore = 0;
+  compScore = 0;
+  round = 1;
+  playerScore.textContent = myScore;
+  computerScore.textContent = compScore;
+  gameWinner.textContent = '';
+  choices.forEach((button) => {
+    button.addEventListener('click', game);
+  });
 }
