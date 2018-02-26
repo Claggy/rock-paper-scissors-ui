@@ -4,20 +4,34 @@
   <meta charset="UTF-8">
   <title>Rock Paper Scissors</title>
   <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
 </head>
 <body>
   
-  <div>
-    <button class="choices" id="rock">Rock</button>
-    <button class="choices" id="paper">Paper</button>
-    <button class="choices" id="scissors">Scissors</button>
-    <button id="reset">Reset</button>
-  </div>
+  <div id="container">
 
-  <div id="results">
-    <div id="playerScore">0</div>
-    <div id="computerScore">0</div>
-    <div id="winner"></div>
+    <div id="roundResult">
+      <h1 id="round">Choose one:</h1>
+      <div id="result">Placehold beats you!</div>
+      <div id="playerChoice" class="lb">Placeholder:</div>
+      <div id="computerChoice" class="lb">Placeholder:</div>
+    </div>
+
+    <div id="choiceButtons">
+      <button class="choices" id="rock">Rock</button>
+      <button class="choices" id="paper">Paper</button>
+      <button class="choices" id="scissors">Scissors</button>
+    </div>
+
+    <div id="scores">
+      <div id="playerScore" class="lb">Your score:<br>0</div>
+      <div id="computerScore" class="lb">Computer score:<br>0</div>
+      <div id="ties" class="lb">Ties:<br>0</div>
+      <div id="winner"></div>
+    </div>
+
+    <button id="reset">Reset</button>
+
   </div>
 
   <script type="text/javascript" src="scripts/main.js"></script>

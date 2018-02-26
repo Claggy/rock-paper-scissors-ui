@@ -1,12 +1,18 @@
 let myScore = 0;
 let compScore = 0;
+let ties = 0;
 let round = 1;
 
 const choices = document.querySelectorAll('.choices');
 const playerScore = document.querySelector('#playerScore');
 const computorScore = document.querySelector('#computerScore');
+const tieTotal = document.querySelector('#ties');
 const gameWinner = document.querySelector('#winner');
 const reset = document.querySelector('#reset');
+const roundNum = document.querySelector('#round');
+const playerChoice = document.querySelector('#playerChoice');
+const computerChoice = document.querySelector('#computerChoice');
+const roundResult = document.querySelector('#result');
 
 document.getElementById('reset').addEventListener('click', resetGame);
 
@@ -20,8 +26,11 @@ choices.forEach((button) => {
 function game() {
   let computerSelection = computerPlay();
 
-  updateScore(playerSelection, computerSelection);
-  console.log(playRound(playerSelection, computerSelection));
+  roundNum.textContent = `Round ${round}`;
+  playerChoice.textContent = `You chose:\r\n${capitalize(playerSelection)}`;
+  computerChoice.textContent = `Computer chose:\r\n${capitalize(computerSelection)}`;
+
+  roundResult.textContent = playRound(playerSelection, computerSelection);
   round++;
 
   if (myScore === 5 || compScore === 5) {
@@ -36,53 +45,28 @@ function playRound(playerSelection, computerSelection) {
 
   switch (true) {
     case playerSelection === 'rock' && computerSelection === 'paper':
-      return `You lose round ${round}! Paper beats rock.`;
-      break;
-
+    case playerSelection === 'paper' && computerSelection === 'scissors':
+    case playerSelection === 'scissors' && computerSelection === 'rock':
+      compScore++;
+      computerScore.textContent = `Computer score:\r\n${compScore}`;
+      return `${capitalize(computerSelection)} beats ${playerSelection}!`;
+      break;  
+      
     case playerSelection === 'rock' && computerSelection === 'rock':
-      return `Round ${round} is a tie! You both chose ${playerSelection}.`;
-      break;
-
-    case playerSelection === 'rock' && computerSelection === 'scissors':
-      return `You win round ${round}! Rock beats scissors.`;
-      break;
-
+    case playerSelection === 'scissors' && computerSelection === 'scissors':
     case playerSelection === 'paper' && computerSelection === 'paper':
-      return `Round ${round} is a tie! You both chose ${playerSelection}.`;
+      ties++;
+      tieTotal.textContent = `Ties:\r\n${ties}`;
+      return `You both chose ${playerSelection}!`;
       break;
 
     case playerSelection === 'paper' && computerSelection === 'rock':
-      return `You win round ${round}! Paper beats rock.`;
-      break;
-
-    case playerSelection === 'paper' && computerSelection === 'scissors':
-      return `You lose round ${round}! Scissors beats paper.`;
-      break;
-
-    case playerSelection === 'scissors' && computerSelection === 'scissors':
-      return `Round ${round} is a tie! You both chose ${playerSelection}.`;
-      break;
-
-    case playerSelection === 'scissors' && computerSelection === 'rock':
-      return `You lose round ${round}! Rock beats scissors.`;
-      break;
-
+    case playerSelection === 'rock' && computerSelection === 'scissors':
     case playerSelection === 'scissors' && computerSelection === 'paper':
-      return `You win round ${round}! Scissors beats paper.`;
+      myScore++;
+      playerScore.textContent = `Your score:\r\n${myScore}`;
+      return `${capitalize(playerSelection)} beats ${computerSelection}!`;
       break;
-  }
-}
-
-function updateScore(playerSelection, computerSelection) {
-  if (playRound(playerSelection, computerSelection).includes("win")) {
-    myScore++;
-    playerScore.textContent = myScore;
-  } else if (playRound(playerSelection, computerSelection).includes("lose")) {
-    compScore++;
-    computerScore.textContent = compScore;
-  } else if (playRound(playerSelection, computerSelection).includes("tie")) {
-    myScore + 0;
-    compScore + 0;
   }
 }
 
@@ -105,12 +89,19 @@ function winner() {
   }
 }
 
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function resetGame() {
   myScore = 0;
   compScore = 0;
+  ties = 0;
   round = 1;
-  playerScore.textContent = myScore;
-  computerScore.textContent = compScore;
+  roundNum.textContent = 'Choose one:';
+  playerScore.textContent = `Your score:\r\n${myScore}`;
+  computerScore.textContent = `Computer score:\r\n${compScore}`;
+  tieTotal.textContent = `Ties:\r\n${ties}`;
   gameWinner.textContent = '';
   choices.forEach((button) => {
     button.addEventListener('click', game);
