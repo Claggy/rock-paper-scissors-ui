@@ -27,8 +27,8 @@ function game() {
   let computerSelection = computerPlay();
 
   roundNum.textContent = `Round ${round}`;
-  playerChoice.textContent = `You chose:\r\n${capitalize(playerSelection)}`;
-  computerChoice.textContent = `Computer chose:\r\n${capitalize(computerSelection)}`;
+  playerChoice.textContent = `Your choice:\r\n${capitalize(playerSelection)}`;
+  computerChoice.textContent = `Computer choice:\r\n${capitalize(computerSelection)}`;
 
   roundResult.textContent = playRound(playerSelection, computerSelection);
   round++;
@@ -101,6 +101,9 @@ function resetGame() {
   roundNum.textContent = 'Choose one:';
   playerScore.textContent = `Your score:\r\n${myScore}`;
   computerScore.textContent = `Computer score:\r\n${compScore}`;
+  playerChoice.textContent = '';
+  computerChoice.textContent = '';
+  roundResult.textContent = '';
   tieTotal.textContent = `Ties:\r\n${ties}`;
   gameWinner.textContent = '';
   choices.forEach((button) => {

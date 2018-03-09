@@ -1,14 +1,18 @@
 #container {
     font-family: Open Sans Semibold, Arial, sans-serif;
     text-align: center;
+    margin: 60px auto;
+    width: 900px;
 }
 
-h1 {
+#round {
     font-size: 2.5em;
+    margin: 0;
+    position: relative;
+    top: 10px;
 }
 
 .choices {
-    background: white;
     border: 3px solid black;    
     font-family: inherit;   
     font-size: 3.5em;
@@ -16,6 +20,75 @@ h1 {
     height: 115px;
     padding-bottom: 5px;
     margin: 10px;
+}
+
+#roundResult {
+    height: 135px;
+    margin: 15px;
+}
+
+#playerChoice {
+    float: left;
+    width: 50%;
+    position: relative;
+    right: 4em;
+    font-size: 20px;
+}
+
+#result {
+    font-size: 30px;
+    position: relative;
+    top: -10px;
+}
+
+#computerChoice {
+    float: right;
+    width: 50%;
+    position: relative;
+    left: 3.8em;
+    font-size: 20px;
+}
+
+#choiceButtons {
+    clear: both;
+}
+
+#scores {
+    margin-top: 50px;
+}
+
+#playerScore {
+    float: left;
+    width: 50%;
+    position: relative;
+    right: 2.8em;
+    font-size: 24px;
+}
+
+#computerScore {
+    float: right;
+    width: 50%;
+    position: relative;
+    left: 3em;
+    font-size: 24px;
+}
+
+#ties {
+    clear: both;
+    font-size: 24px;
+    position: relative;
+    top: -80px;    
+}
+
+#winner {
+    font-size: 40px;
+    position: relative;
+    top: -40px;
+}
+
+#reset {
+    border: 2px solid black;
+    padding-bottom: 1px;    
 }
 
 .lb {
