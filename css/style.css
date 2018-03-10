@@ -1,3 +1,7 @@
+body {
+    background: #fbfbfb;
+}
+
 #container {
     font-family: Open Sans Semibold, Arial, sans-serif;
     text-align: center;
@@ -13,13 +17,18 @@
 }
 
 .choices {
-    border: 3px solid black;    
+    border: 2px solid black;    
     font-family: inherit;   
     font-size: 3.5em;
     width: 270px;
     height: 115px;
     padding-bottom: 5px;
     margin: 10px;
+}
+
+.choices:hover {
+    border: 3px solid black;
+    color: black;
 }
 
 #roundResult {
